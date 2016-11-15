@@ -81,5 +81,58 @@ if ( ! function_exists( 'tuts_numbered_pagination' ) ) {
         echo '</div>';
     }
 }
+/* ------------------------------------------------ */
+/* 5. REGISTER WIDGET AREAS */
+/* ------------------------------------------------ */
+if ( ! function_exists( 'tuts_widget_init' ) ) {
+    function tuts_widget_init() {
+        if ( function_exists( 'register_sidebar' ) ) {
+            register_sidebar( array(
+                'name' => __( 'Main Widget Area', 'tuts' ),
+                'id' => 'main-sidebar',
+                'description' => __( 'Appears in the blog pages.', 'tuts' ),
+                'before_widget' => '<div id="%1$s" class="widget %2$s">',
+                'after_widget' => '</div> <!-- end widget -->',
+                'before_title' => '<h2>',
+                'after_title' => '</h2>'
+            ) );
+        }
+    }
+
+    add_action( 'widgets_init', 'tuts_widget_init' );
+}
+
+/* ------------------------------------------------ */
+/* 6. SCRIPTS */
+/* ------------------------------------------------ */
+if ( ! function_exists( 'tuts_scripts' ) ) {
+    function tuts_scripts() {
+        /* Register scripts. */
+        wp_register_script( 'modernizr-js', JS . '/vendor/modernizr-2.6.2.min.js', false, false, false );
+        wp_register_script( 'bootstrap-js', THEMEROOT . '/bower_components/bootstrap/dist/js/bootstrap.min.js', array( 'jquery' ), false, true );
+        wp_register_script( 'isotope-js', THEMEROOT . '/bower_components/isotope/dist/isotope.pkgd.min.js', false, false, true );
+        wp_register_script( 'plugins-js', JS . '/plugins.js', false, false, true );
+        wp_register_script( 'main-js', JS . '/main.js', false, false, true );
+
+        /* Load the custom scripts. */
+        wp_enqueue_script( 'modernizr-js' );
+        wp_enqueue_script( 'bootstrap-js' );
+        wp_enqueue_script( 'isotope-js' );
+        wp_enqueue_script( 'plugins-js' );
+        wp_enqueue_script( 'main-js' );
+
+        /* Load the stylesheets. */
+        wp_enqueue_style( 'bootstrap-css', THEMEROOT . '/bower_components/bootstrap/dist/css/bootstrap.min.css' );
+        wp_enqueue_style( 'main-css', THEMEROOT . '/css/style.css' );
+    }
+
+    add_action( 'wp_enqueue_scripts', 'tuts_scripts' );
+}
+/* ------------------------------------------------ */
+/* 7. WIDGETS */
+/* ------------------------------------------------ */
+require_once( get_template_directory() . '/include/widgets/widget-recent-projects.php' );
+
+
 
 ?>
