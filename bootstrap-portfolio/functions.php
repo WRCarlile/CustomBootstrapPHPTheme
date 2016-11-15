@@ -1,25 +1,27 @@
 <?php
-	/*
-	# =================================================
-	# functions.php
-	#
-	# The theme's functions.
-	# =================================================
-	*/
+/*
+# =================================================
+# functions.php
+#
+# The theme's functions.
+# =================================================
+*/
 
-	/* ------------------------------------------------ */
-	/* 1. CONSTANTS */
-	/* ------------------------------------------------ */
-	define( 'THEMEROOT', get_stylesheet_directory_uri() );
-	define( 'IMAGES', THEMEROOT . '/img' );
-	define( 'JS', THEMEROOT . '/js' );
+/* ------------------------------------------------ */
+/* 1. CONSTANTS */
+/* ------------------------------------------------ */
+define( 'THEMEROOT', get_stylesheet_directory_uri() );
+define( 'IMAGES', THEMEROOT . '/img' );
+define( 'JS', THEMEROOT . '/js' );
+
+
 
 /* ------------------------------------------------ */
 /* 2. THEME SETUP */
 /* ------------------------------------------------ */
-if ( ! function_exists('tuts_theme_setup')) {
-	function tuts_theme_setup() {
-		/* Make the theme available for translation. */
+if ( ! function_exists( 'tuts_theme_setup' ) ) {
+    function tuts_theme_setup() {
+        /* Make the theme available for translation. */
         $lang_dir = THEMEROOT . '/languages';
         load_theme_textdomain( 'tuts', $lang_dir );
 
@@ -37,6 +39,9 @@ if ( ! function_exists('tuts_theme_setup')) {
 
     add_action( 'after_setup_theme', 'tuts_theme_setup' );
 }
+
+
+
 /* ------------------------------------------------ */
 /* 3. GET POST META */
 /* ------------------------------------------------ */
@@ -52,6 +57,9 @@ if ( ! function_exists( 'tuts_post_meta' ) ) {
         }
     }
 }
+
+
+
 /* ------------------------------------------------ */
 /* 4. NUMBERED PAGINATION */
 /* ------------------------------------------------ */
@@ -81,6 +89,9 @@ if ( ! function_exists( 'tuts_numbered_pagination' ) ) {
         echo '</div>';
     }
 }
+
+
+
 /* ------------------------------------------------ */
 /* 5. REGISTER WIDGET AREAS */
 /* ------------------------------------------------ */
@@ -101,6 +112,8 @@ if ( ! function_exists( 'tuts_widget_init' ) ) {
 
     add_action( 'widgets_init', 'tuts_widget_init' );
 }
+
+
 
 /* ------------------------------------------------ */
 /* 6. SCRIPTS */
@@ -128,6 +141,9 @@ if ( ! function_exists( 'tuts_scripts' ) ) {
 
     add_action( 'wp_enqueue_scripts', 'tuts_scripts' );
 }
+
+
+
 /* ------------------------------------------------ */
 /* 7. WIDGETS */
 /* ------------------------------------------------ */
@@ -135,4 +151,12 @@ require_once( get_template_directory() . '/include/widgets/widget-recent-project
 
 
 
+/* ------------------------------------------------ */
+/* 8. VALIDATE FIELD LENGTH  */
+/* ------------------------------------------------ */
+if ( ! function_exists( 'tuts_validate_length' ) ) {
+	function tuts_validate_length( $fieldValue, $minLength ) {
+		return ( strlen( trim( $fieldValue ) ) > $minLength );
+	}
+}
 ?>

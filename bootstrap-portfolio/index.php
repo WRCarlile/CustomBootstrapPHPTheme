@@ -12,6 +12,7 @@
 /* Load header.php. */
 get_header();
 ?>
+
 <div class="container-fluid text-center">
     <div class="jumbotron">
         <div class="row">
@@ -53,6 +54,7 @@ get_header();
         </div> <!-- end posts -->
     </div> <!-- end row -->
 </div> <!-- end container-fluid -->
+
 <?php
 /* Load footer.php. */
 get_footer();
